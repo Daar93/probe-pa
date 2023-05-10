@@ -6,6 +6,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "populate": "node ./populate/populate.js",
+    "equipment": "node ./equipment/equipment.js",
     "format": "prettier -w ."
   },
   "keywords": [],

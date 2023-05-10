@@ -15,6 +15,8 @@ const deleteEmployee = (id) => {
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
+  const [positionSearchValue, setPositionSearchValue] = useState("");
+  const [levelSearValue, setLevelSearchValue] = useState("");
 
   const handleDelete = (id) => {
     deleteEmployee(id);
@@ -22,6 +24,23 @@ const EmployeeList = () => {
     setEmployees((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
+  };
+
+  function positionSearch(searchKey) {
+    return employees.filter(employee => positionSearchValue === employee[searchKey]);
+  };
+
+  function levelSearch(searchKey) {
+    return employees.filter(employee => levelSearValue === employee[searchKey]);
+  };
+
+  function handleKeyDown(event) {
+    const searchKey = event.target.className;
+    console.log(positionSearchValue)
+    if(event.key === "Enter") {
+      searchKey === "position" ? setEmployees(positionSearch(searchKey)) : setEmployees(levelSearch(searchKey)) 
+      ;
+    }
   };
 
   useEffect(() => {
@@ -36,7 +55,21 @@ const EmployeeList = () => {
     return <Loading />;
   }
 
-  return <EmployeeTable employees={employees} onDelete={handleDelete} />;
+  return <>
+    <input 
+      type="text" 
+      className="position" 
+      placeholder="Position name" 
+      onChange={(event) => setPositionSearchValue(event.target.value)} 
+      onKeyDown={handleKeyDown} />
+    <input 
+      type="text" 
+      className="level" 
+      placeholder="Level" 
+      onChange={(event) => setLevelSearchValue(event.target.value)}
+      onKeyDown={handleKeyDown} />
+    <EmployeeTable employees={employees} onDelete={handleDelete} />;
+  </>
 };
 
 export default EmployeeList;

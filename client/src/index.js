@@ -8,11 +8,13 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import EquipmentList from "./Pages/EquipmentList";
+import EquipmentCreator from "./Pages/EquipmentCreator";
+import EquipmentUpdater from "./Pages/EquipmentUpdater";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
-import EquipmentList from "./Pages/EquipmentList";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "/equipments",
         element: <EquipmentList />
+      },
+      {
+        path: "/create/equipment",
+        element: <EquipmentCreator />
+      },
+      {
+        path: "/update/equipments/:id",
+        element: <EquipmentUpdater />
       }
     ],
   },

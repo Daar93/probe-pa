@@ -6,6 +6,12 @@ const fetchEquipments = () => {
   return fetch("/api/equipments").then((res) => res.json());
 };
 
+const deleteEquipment = (id) => {
+  return fetch(`/api/equipments/${id}`, { method: "DELETE" }).then((res) =>
+    res.json()
+  );
+};
+
 export default function EquipmentList() {
     const [loading, setLoading] = useState(true);
     const [equipments, setEquipments] = useState(null);
@@ -19,7 +25,15 @@ export default function EquipmentList() {
         });
     }, []);
 
+    const handleDelete = (id) => {
+      deleteEquipment(id);
+  
+      setEquipments((equipments) => {
+        return equipments.filter((equipment) => equipment._id !== id);
+      });
+    };
+
     return <>
-      {equipments && <EquipmentTable equipment={equipments}></EquipmentTable>}
+      {equipments && <EquipmentTable equipment={equipments} onDelete={handleDelete} ></EquipmentTable>}
     </>
 };

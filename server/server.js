@@ -3,7 +3,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const EquipmentModel = require("./db/equipment.model");
+const HobbyModel = require("./db/hobby.model");
 // const employees = require("./route/employee");
+
+
+// 1. Add DB model Hobby with fields "name" and "description"
+// 2. Populate DB with some hobbies
+// 3. Extend Employee model with field "hobbies", should be array of references to Hobby objects
+// 4. Create a new page where we can add new hobbies
+// 5. Update Employee form to select hobbies from the list of existing hobbies
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -24,6 +32,12 @@ app.get("/api/employees/", async (req, res) => {
 app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id);
   return res.json(employee);
+});
+
+app.get("/api/hobbies/", async (req, res) => {
+  const hobbies = await HobbyModel.find();
+
+  res.json(hobbies);
 });
 
 app.post("/api/employees/", async (req, res, next) => {

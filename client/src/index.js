@@ -11,11 +11,18 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import EquipmentList from "./Pages/EquipmentList";
 import EquipmentCreator from "./Pages/EquipmentCreator";
 import EquipmentUpdater from "./Pages/EquipmentUpdater";
+import CreateNewHobbies from "./Pages/CreateNewHobbies";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
 
+
+// 1. Add DB model Hobby with fields "name" and "description"
+// 2. Populate DB with some hobbies
+// 3. Extend Employee model with field "hobbies", should be array of references to Hobby objects
+// 4. Create a new page where we can add new hobbies
+// 5. Update Employee form to select hobbies from the list of existing hobbies
 
 const router = createBrowserRouter([
   {
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/update/equipments/:id",
         element: <EquipmentUpdater />
+      },
+      {
+        path: "/create/hobby",
+        element: <CreateNewHobbies />
       }
     ],
   },

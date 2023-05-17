@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+const EmployeeForm = ({ onSave, disabled, employee, onCancel, hobbies }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
@@ -55,6 +55,10 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           id="position"
         />
       </div>
+
+      <select>
+        {hobbies.map(hobby => <option>{ hobby.name }</option> )}
+      </select>
 
       <div className="buttons">
         <button type="submit" disabled={disabled}>

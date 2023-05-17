@@ -14,6 +14,11 @@ const updateEmployee = (employee) => {
   }).then((res) => res.json());
 };
 
+const fetchAllHobbies = () => {
+
+  return fetch(`/api/hobbies/`).then((res) => res.json());
+};
+
 const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
@@ -25,6 +30,11 @@ const EmployeeUpdater = () => {
   const [employee, setEmployee] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [employeeLoading, setEmployeeLoading] = useState(true);
+  const [hobbies, setHobbies] = useState(null);
+
+  useEffect(() => {
+    fetchAllHobbies().then(hobbies => setHobbies(hobbies));
+  }, [])
 
   useEffect(() => {
     setEmployeeLoading(true);
@@ -43,6 +53,7 @@ const EmployeeUpdater = () => {
         navigate("/");
       });
   };
+  console.log(hobbies)
 
   if (employeeLoading) {
     return <Loading />;
@@ -54,6 +65,7 @@ const EmployeeUpdater = () => {
       onSave={handleUpdateEmployee}
       disabled={updateLoading}
       onCancel={() => navigate("/")}
+      hobbies={hobbies}
     />
   );
 };
